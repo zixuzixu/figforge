@@ -18,7 +18,25 @@
 | 海报、一页纸摘要、需要 `mm` 精度 | HTML + CSS `@page` | `html-print.md` | Chromium `--print-to-pdf` | NeurIPS 海报 600×1500 mm |
 | 数学符号密集、图论、张量形状 | TikZ | 直接写 `.tex` | `\input{}` | Fig 2 pipeline v5（Gemini 版被替换） |
 | 需要"看起来像照片"的东西：场景、材质、封面 | ImageGen（OpenAI `gpt-image-1` / Gemini） | `imagegen.md` prompt 模板 | PNG → 嵌入上面任一种 | Fig 1 探索阶段的 8 张候选 |
+| 蛋白结构 / 分子 / 显微图像——**数据本身** | 领域工具：PyMOL、ChimeraX、ImageJ | 各工具自带 | PNG 素材 → 嵌入 JSX 拼版 | — |
+| 信号通路 / 细胞示意 / 实验流程 | JSX → Satori（受体、箭头、细胞膜都是 div + border） | `satori-figure` starter | PDF | — |
 | 一个图标、一根箭头、一个圆柱 | `<div>` 画或手写 `<svg>` | `satori-figure/references/patterns.md` §5–7 | inline | 头像、KB 圆柱、星级 |
+
+## 为什么不是直接写 SVG，也不是 HTML
+
+五条路的对照（TRACE 全走过一遍）：
+
+| | 矢量 | 可编辑 | 布局引擎 | 不用浏览器 | 死在哪 |
+|---|---|---|---|---|---|
+| L0 ImageGen 直出 | ✗ | ✗ | — | ✓ | 文字错、改不动、不可复现 |
+| L1 生图 → 描成 SVG | ✓ | ✓ | ✗ | ✓ | 两头不沾：丢了惊艳，没得精确 |
+| L2 Agent 直接写 SVG | ✓ | ✓ | ✗ | ✓ | 每个 x/y 心算，改一句动十处（v3–v7） |
+| L3 HTML + inline CSS | ✗ | △ | ✓ | ✗ | 样式散落；产物是截图或打印 PDF |
+| **L4 JSX → Satori → SVG** | ✓ | ✓ | ✓ | ✓ | — |
+
+L1 的教训不是"别用 ImageGen"，是**参考构图，不描摹像素**。L3 的教训不是"别用 HTML"，是 HTML 干海报（`html-print.md`），不干 Figure。
+
+**ImageGen 的硬边界：能出氛围，不能出数据。** 蛋白质结构让它画就是幻觉——那一类走领域工具出 PNG，再进 JSX 拼版。
 
 ## 边界情况
 

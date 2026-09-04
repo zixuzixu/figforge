@@ -66,7 +66,8 @@ uv run scripts/inspect_figure.py fig1.svg      # → 2× PNG + 四象限 TL/TR/B
 ### 4. 交付
 
 ```bash
-scripts/svg2pdf.sh fig1.svg figures/fig1.pdf    # rsvg-convert + pdfimages 校验内嵌图没丢
+scripts/svg2pdf.sh fig1.svg figures/fig1.pdf                 # rsvg-convert + 校验内嵌图没丢
+scripts/svg2pdf.sh fig1.svg figures/fig1.pdf --strip-masks   # Satori 输出加这个: 体积减半 (见 pitfalls)
 ```
 
 LaTeX 里 `\includegraphics[width=\linewidth]{figures/fig1.pdf}`。海报/社媒另出 300 dpi PNG。

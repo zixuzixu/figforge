@@ -37,7 +37,7 @@ python3 ../../skills/figforge/scripts/imagegen.py imagegen-prompts.jsonl --outdi
 npm install --no-save satori esbuild          # 一次
 node render_fig1_trace_comparison_v1.mjs      # → fig1_trace_comparison_v1.svg, <2s
 uv run ../../skills/figforge/scripts/inspect_figure.py fig1_trace_comparison_v1.svg
-../../skills/figforge/scripts/svg2pdf.sh fig1_trace_comparison_v1.svg fig1.pdf
+../../skills/figforge/scripts/svg2pdf.sh fig1_trace_comparison_v1.svg fig1.pdf --strip-masks   # 这张没有半颗星, 可以剥
 ```
 
 需要系统装有 Lato 字体（`/usr/share/fonts/truetype/lato/`，Ubuntu `apt install fonts-lato`）。

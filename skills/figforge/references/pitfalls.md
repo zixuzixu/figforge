@@ -9,8 +9,15 @@
 → 只用 `rsvg-convert -f pdf in.svg -o out.pdf`。转完 `pdfimages -list out.pdf` 数一下内嵌图。
 `scripts/svg2pdf.sh` 已内置这个校验。
 
-**`pdfimages -list` 会数出几百个小图像对象。** 那是 rsvg-convert 把 Satori 的 `<mask>` 光栅化了，文字仍是矢量 path。
-只有"SVG 有 base64 图、PDF 图像数为 0"才是丢图。
+**Satori 的 overflow mask 让 PDF 膨胀 2–3×。** Satori 给每个圆角 / 溢出裁切的容器套一个 `<mask id="satori_om-*">`，
+rsvg-convert 把每个带 mask 的组变成一对页面大小的 image + smask。TRACE Fig 1：89 个 mask 组 → PDF 里 492 个图像对象、1.5 MB。
+实测放大 4× 后文字边缘与直接渲染 SVG 无差别，所以这是**体积和对象数**的问题，不是肉眼清晰度的问题——
+但几张这样的图就能把 arXiv 包顶到上限，有些阅读器翻页也会卡。
+→ `svg2pdf.sh in.svg out.pdf --strip-masks`：剥掉 mask 引用再转。1.5 MB → 620 KB，492 → 46 个对象，
+2400 px 渲染逐像素比对差异 0.01%。
+**例外**：依赖 `overflow:hidden` 裁切的元素（`satori-figure/references/patterns.md` §7 的半颗星）会失效。
+剥之前用 `inspect_figure.py` 对比一次，或者只在没有这类元素的图上用。
+只有"SVG 有 base64 图、PDF 图像数为 0"才是真的丢图。
 
 **纯文字 SVG 用 inkscape 没问题。** 这个 bug 只针对 `data:image/...;base64` 的 `<image>`。
 

@@ -1,0 +1,8 @@
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+# 渲染产物: 案例目录只提交源码和展示用 PNG
+examples/**/*.svg
+examples/**/*.pdf
+examples/**/.*.compiled.mjs

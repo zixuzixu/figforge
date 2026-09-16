@@ -5,12 +5,12 @@
 
 <table>
 <tr>
-<td width="50%"><img src="examples/trace-figure1/01-imagegen-candidate-a.jpg" alt="ImageGen 候选"></td>
-<td width="50%"><img src="examples/trace-figure1/04-final-satori-comparison.png" alt="最终 Satori 渲染"></td>
+<td width="50%"><img src="examples/pasta-mediation/source/mediation-photo-1600.jpg" alt="图像模型直出的中介图"></td>
+<td width="50%"><img src="examples/pasta-mediation/fig1_mediation_zh.png" alt="JSX → Satori 渲染的中介图"></td>
 </tr>
 <tr>
-<td align="center"><sub>OpenAI gpt-image-1 出的候选。注意中间那栏：<b>Releieve</b></sub></td>
-<td align="center"><sub>最终版。JSX → Satori → SVG → PDF，文字零错误、矢量、可编辑</sub></td>
+<td align="center"><sub>图像模型直出。文字画在像素里，改一个系数要整张重生成</sub></td>
+<td align="center"><sub>JSX → Satori → SVG → PDF。矢量、可编辑，换语言改一个字典</sub></td>
 </tr>
 </table>
 
@@ -24,9 +24,12 @@
 | **代码渲染**（JSX→Satori / HTML / matplotlib / TikZ） | 终稿：精确、矢量、可编辑、git 可追踪 | 从零想视觉方向 |
 | **迭代纪律** | 2× 渲染、四象限检查、一次改一处、版本号、迭代报告 | — |
 
-真实数据：TRACE 论文的 Figure 1 迭代了 13 轮，OpenAI 3 张 + Gemini 5 张候选全部淘汰，
-终稿由 Satori 渲染。散点图的 13 个 label 放弃 `adjustText` 改全手动才做到零交叉。
-全过程在 [`examples/`](examples/)。
+两组案例，全在 [`examples/`](examples/)：
+
+- **教学案例**《意大利面就应该拌 42 号混凝土》——数据全部虚构、格式完全严肃。图 1 中介路径图（`pasta-mediation/`）
+  和实验流程图（`pasta-workflow/`）都是 JSX → Satori；素材从图像模型生成的原图里抠出来，版面和数字在代码里。
+- **真实案例** TRACE 论文的 Figure 1 迭代了 13 轮，OpenAI 3 张 + Gemini 5 张候选全部淘汰，终稿由 Satori 渲染（`trace-figure1/`）。
+  散点图的 13 个 label 放弃 `adjustText` 改全手动才做到零交叉（`trace-fig4-scatter/`）。
 
 ## 图型 → 工具链
 
@@ -53,7 +56,8 @@ cd ~/codes/figforge && ./install.sh
 - **`satori-figure`** — JSX → Satori 的完整工具链（starter、render 脚本、11 条 gotcha、11 个布局 pattern）
 
 依赖：Node ≥ 18、`rsvg-convert`（`apt install librsvg2-bin`）、[uv](https://docs.astral.sh/uv/)、
-Lato 字体（`apt install fonts-lato`）。ImageGen 需要 `OPENAI_API_KEY`（可选）。
+Lato 字体（`apt install fonts-lato`）。中文图另需 Noto Sans CJK（`apt install fonts-noto-cjk`），
+Satori 不认 `.ttc`，用 `examples/pasta-mediation/extract_fonts.py` 抽成 `.otf`。ImageGen 需要 `OPENAI_API_KEY`（可选）。
 
 ## 用法
 
@@ -89,6 +93,8 @@ skills/
 │   └── assets/prompts.example.jsonl
 └── satori-figure/                    JSX → Satori 工具链（独立可用）
 examples/
+├── pasta-mediation/                  中介路径图：生图抠素材 + JSX 拼版，中英文一份代码；CJK 字体、箭头注入
+├── pasta-workflow/                   实验流程图两版：纯矢量 / 生图图标 atlas 裁切嵌入（并行分支产物）
 ├── trace-figure1/                    13 轮迭代的全部材料：候选图、终稿、JSX、prompt、迭代报告
 └── trace-fig4-scatter/               零交叉散点图：脚本 + 三次 commit 的演进
 ```
@@ -96,7 +102,8 @@ examples/
 ## 致谢
 
 - [Satori](https://github.com/vercel/satori) — 让 JSX 直接变成 SVG
-- 案例来自 *TRACE: Tourism Recommendation with Accountable Citation Evidence*（arXiv 预印本）
+- 教学案例的梗出自博主 @延边刺客（"意大利面就应该拌 42 号混凝土"）；论文数据全部虚构，混凝土不可食用
+- 真实案例来自 *TRACE: Tourism Recommendation with Accountable Citation Evidence*（arXiv 预印本）
 
 ## License
 

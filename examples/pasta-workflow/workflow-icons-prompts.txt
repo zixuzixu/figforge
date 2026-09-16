@@ -1,0 +1,14 @@
+Use the attached image as the reference for the EXISTING miniature icons, not as a layout to reproduce. Extract and faithfully recreate enlarged high-resolution versions of its realistic icons. Produce one square 3-by-3 icon asset sheet on a genuinely transparent background, 3072x3072 if possible. Each equal cell contains ONE centered icon/group, with generous transparent padding, all completely inside its own cell, no labels, no text, no borders, no arrows, no colored cards. Preserve original yellow excavator appearance, grey porous concrete, golden spaghetti, soft realistic miniature scientific-rendering style. Exact row-major positions:
+row1 col1: the original INPUT GROUP, a nest of golden dry spaghetti next to a grey concrete cylinder and three tiny powder piles in front.
+row1 col2: the original yellow tracked excavator facing left with lowered bucket, isolated.
+row1 col3: FIVE small white pasta bowls in one horizontal row, first four golden, fifth dark, as original five formulations icon.
+row2 col1: original three overlapping powder heaps, beige off-white grey.
+row2 col2: original five small heaps of different grey and tan material in a horizontal row.
+row2 col3: original SIX metallic screws arranged as two rows of three, varying lengths.
+row3 col1: original single GREY POROUS CONCRETE CYLINDER specimen, upright.
+row3 col2: original white bowl full of golden spaghetti seen from slightly above.
+row3 col3: original compression-test icon, a grey porous concrete cylinder clamped between two circular brushed steel platens with short vertical steel stems above and below.
+These are enlarged icon assets for re-inserting in a vector diagram. Do not add invented objects or letters. Maintain faithful original silhouettes and materials. Background alpha transparency, not a checkerboard image.
+
+Background correction:
+Edit this exact icon sheet. Replace ALL checkerboard background everywhere with perfectly flat pure white #FFFFFF. Remove all checkerboard pattern, including around holes and between icons. Keep all nine icons in exactly the same 3x3 cells, same materials, proportions, object appearances and positions. No text, no gridlines, no labels. High resolution enlarged crisp icon asset sheet, prefer 3072x3072. Solid white background, NOT transparency, NOT grey, NO checkerboard.

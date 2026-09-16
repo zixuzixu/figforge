@@ -134,3 +134,20 @@ Padding on a Col shifts ALL children. If you want to indent only the quote block
 ## When you change a key color, update the post-process regex
 
 The arrow injection relies on matching the chip's `fill="#f7ecc9"`. If the palette's chip color changes, the regex no longer matches → no arrows render. Search the render script when swapping colors.
+
+## CJK text: `.ttc` collections are rejected; hand Satori one `.otf` per weight
+
+Satori (opentype.js underneath) only parses a single TTF/OTF/WOFF. The system Noto Sans CJK ships as `NotoSansCJK-*.ttc` collections, which fail to load. Extract the face you need with fontTools:
+
+```python
+from fontTools.ttLib import TTCollection
+coll = TTCollection('/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc')
+names = [f['name'].getDebugName(1) for f in coll.fonts]
+coll.fonts[names.index('Noto Sans CJK SC')].save('fonts/NotoSansCJKsc-Regular.otf')
+```
+
+Then pass `fonts: [Lato…, Noto…]` with Lato first: Satori falls back **per glyph**, so Latin and digits render in Lato and Han characters in Noto without any per-span font switching. The `.otf` files are ~16 MB each — keep them out of git. See `examples/pasta-mediation/extract_fonts.py`.
+
+## Leading / trailing whitespace inside a text node is dropped
+
+`h(Text, {}, 'a')` followed by `h(Text, {}, ' = 0.62')` renders as `a= 0.62`; `'T'` + `' (N·m)'` renders as `T(N·m)`. Satori trims the ends of every text node. Put the spacing on the parent instead — `gap: 8` on the Row — and keep strings free of leading/trailing spaces.

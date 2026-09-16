@@ -1,5 +1,8 @@
 # FigForge
 
+> **JSX → Satori 这条链已单独拆成 [vecfig](https://github.com/zixuzixu/vecfig)**（skill + pasta 案例，名字换成搜得到的）。
+> 这里保留全套工作流：ImageGen 探索、matplotlib 数据图、海报、迭代纪律。
+
 **把生成式 AI 的视觉能力和代码的可控性拼起来，做发表级科研插图。**
 一个 Claude Code skill，附带从 NeurIPS 投稿里提炼出来的完整方法论和真实案例。
 
